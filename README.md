@@ -115,7 +115,7 @@ $chineseTypesetting->correct($text);
 // <p>Hello 世界。</p>
 
 // 使用指定方法来纠正排版
-$text = '<p class="class-name"> Hello世界。</p>';
+$text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
 $chineseTypesetting->correct($text, ['insertSpace', 'removeClass']);
 // <p style="color: #FFFFFF;">Hello 世界。</p>
 ```
