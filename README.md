@@ -5,7 +5,7 @@
 ## 安装
 使用 composer 安装：
 ```bash
-composer install jxlwqq/chinese-typesetting
+composer require "jxlwqq/chinese-typesetting"
 ```
 
 ## 使用
