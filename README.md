@@ -101,4 +101,4 @@ $chineseTypesetting->removeIndent($text);
 // <p>Hello World!</p>
 ```
 
-首行是否缩进，[争议较大](https://zh.wikipedia.org/wiki/Wikipedia:投票/段落空兩格)，个人倾向于"段首空两格，会破坏美感"的观点。
+首行是否缩进，[争议较大](https://zh.wikipedia.org/wiki/Wikipedia:投票/段落空兩格)，个人倾向于段首空两格，会破坏美感的观点。
