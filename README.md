@@ -102,3 +102,20 @@ $chineseTypesetting->removeIndent($text);
 ```
 
 首行是否缩进，[争议较大](https://zh.wikipedia.org/wiki/Wikipedia:投票/段落空兩格)，个人倾向于段首空两格，会破坏美感的观点。
+
+### 使用全部或指定的方法来纠正排版
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+// 使用全部方法来纠正排版
+$text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
+$chineseTypesetting->correct($text);
+// <p>Hello 世界。</p>
+
+// 使用指定方法来纠正排版
+$text = '<p class="class-name"> Hello世界。</p>';
+$chineseTypesetting->correct($text, ['insertSpace', 'removeClass']);
+// <p style="color: #FFFFFF;">Hello 世界。</p>
+```

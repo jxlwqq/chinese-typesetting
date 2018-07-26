@@ -11,6 +11,25 @@ namespace Jxlwqq\ChineseTypesetting;
 class ChineseTypesetting
 {
     /**
+     * 使用全部或指定的方法来纠正排版
+     * @param $text
+     * @param array $methods
+     * @return mixed
+     */
+    public function correct($text, $methods = []) {
+        if (empty($methods)) {
+            $methods = get_class_methods($this);
+        }
+        foreach ($methods as $method) {
+            if (__FUNCTION__ == $method || !method_exists($this, $method)) {
+                continue;
+            }
+            $text = $this->$method($text);
+        }
+        return $text;
+
+    }
+    /**
      * 在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格
      * insert a space between Chinese character and English/Greek/Number character
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#空格
