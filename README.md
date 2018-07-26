@@ -89,7 +89,7 @@ $chineseTypesetting->removeEmptyTag($text);
 // <p>Hello World!</p>
 ```
 
-### 清除段首缩紧
+### 清除段首缩进
 ```php
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
 
