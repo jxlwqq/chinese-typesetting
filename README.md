@@ -21,9 +21,9 @@ $text = '今天，我在Apple Store上购买了一台13英寸MacBook Pro笔记�
 $chineseTypesetting->insertSpace($text);
 // 今天，我在 Apple Store 上购买了一台 13 英寸 MacBook Pro 笔记本电脑，花费了 14188 元。。
 
-$text = '这一方法通过将不同目的基因的末端与一个小的β-galactosidase融合。';
+$text = 'α碳原子为与有机物中与官能团相连的第一个碳原子，第二个为β碳原子，以此类推。';
 $chineseTypesetting->insertSpace($text);
-// 这一方法通过将不同目的基因的末端与一个小的 β-galactosidase 融合。
+// α 碳原子为与有机物中与官能团相连的第一个碳原子，第二个为 β 碳原子，以此类推。
 ```
 
 在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格。 参考依据：[中文文案排版指北：空格
@@ -41,7 +41,7 @@ $text = '这个名为 ＡＢＣ 的蛋糕只卖 １０００ 元。';
 $chineseTypesetting->full2Half($text);
 // 这个名为 ABC 的蛋糕只卖 1000 元。
 ```
-有限度的全角转半角（英文、数字、百分号、空格等使用半角字符）。参考依据：[中文文案排版指北：全角和半角](https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角)。
+有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）。参考依据：[中文文案排版指北：全角和半角](https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角)。
 
 ### 清除 HTML 标签的样式
 ```php
@@ -64,3 +64,41 @@ $text = '<p style="color: #FFFFFF;">Hello World!</p>';
 $chineseTypesetting->removeStyle($text);
 // <p>Hello World!</p>
 ```
+
+### 清除空的段落标签
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+// 清除空的段落标签
+$text = '<p>Hello World!</p><p></p>';
+$chineseTypesetting->removeEmptyParagraph($text);
+// <p>Hello World!</p>
+```
+
+### 清除所有空的标签
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+// 清除所有空的标签
+$text = '<p>Hello World!<span></span></p>';
+$chineseTypesetting->removeEmptyTag($text);
+// <p>Hello World!</p>
+```
+
+### 清除段首缩紧
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+// 清除段首缩进
+$text = '<p>  Hello World!</p>';
+$chineseTypesetting->removeIndent($text);
+// <p>Hello World!</p>
+```
+
+首行是否缩进，[争议较大](https://zh.wikipedia.org/wiki/Wikipedia:投票/段落空兩格)，个人倾向于"段首空两格，会破坏美感"的观点。

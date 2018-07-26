@@ -106,7 +106,7 @@ class ChineseTypesetting
     }
 
     /**
-     * 有限度的全角转半角（英文、数字、百分号、空格等使用半角字符）
+     * 有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）
      * Limited Fullwidth to halfwidth Transformer
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角
      * @param $text
@@ -127,7 +127,11 @@ class ChineseTypesetting
             'ｏ' => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's',
             'ｔ' => 't', 'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x',
             'ｙ' => 'y', 'ｚ' => 'z',
-            '％' => '%', '　' => ' ', '．' => '.');
+            '－' => '-', '　' => ' ', '／' => '/',
+            '％' => '%', '＃' => '#', '＠' => '@', '＆' => '&', '＜' => '<',
+            '＞' => '>', '［' => '[', '］' => ']', '｛' => '{', '｝' => '}',
+            '＼' => '\\', '｜' => '|', '＋' => '+', '＝' => '=', '＿' => '_',
+            '＾' => '^', '￣' => '~', '｀' => '`');
         return strtr($text, $arr);
     }
 
@@ -162,6 +166,33 @@ class ChineseTypesetting
     public function removeStyle($text)
     {
         return preg_replace('#\s(style)="[^"]+"#', '', $text);
+    }
+
+    /**
+     * 清除空段落标签
+     * @param $text
+     * @return null|string|string[]
+     */
+    public function removeEmptyParagraph($text) {
+        return preg_replace('/<p[^>]*>([\s|&nbsp;]?)<\\/p[^>]*>/', '' , $text);
+    }
+
+    /**
+     * 清除所有空标签
+     * @param $text
+     * @return null|string|string[]
+     */
+    public function removeEmptyTag($text) {
+        return preg_replace('/<[^\/>]*>([\s|&nbsp;]?)*<\/[^>]*>/', '', $text);
+    }
+
+    /**
+     * 清除段首缩紧
+     * @param $text
+     * @return null|string|string[]
+     */
+    public function removeIndent($text) {
+        return preg_replace('/<p([^>]*)>(\s|&nbsp;)+/', '<p${1}>', $text);
     }
 
 }
