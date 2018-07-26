@@ -1,0 +1,23 @@
+{
+    "name": "jxlwqq/chinese-typesetting",
+    "description": "Better Typesetting for Chinese",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jxlwqq",
+            "email": "jxlwqq@gmail.com",
+            "homepage": "https://jxlwqq.github.io"
+
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5..0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jxlwqq\\ChineseTypesetting\\": "src/"
+        }
+    }
+}
