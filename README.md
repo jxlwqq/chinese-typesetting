@@ -29,7 +29,7 @@ $chineseTypesetting->insertSpace($text);
 在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格。 参考依据：[中文文案排版指北：空格
 ](https://github.com/mzlogin/chinese-copywriting-guidelines#空格)。
 
-目前，比较主流的是约定是在中文与英文之间添加空格，我在此基础上，增加了对用于数学、科学和工程的希腊字母的支持，更加方便使用。
+目前，比较主流的约定是在中文与英文之间添加空格。我在此基础上，增加了对用于数学、科学和工程的希腊字母的支持。
 
 ### 全角转半角
 ```php
@@ -50,14 +50,17 @@ use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
 $chineseTypesetting = new ChineseTypesetting();
 
 // 清除 Class 属性
-$text = '<p class="class-name"></p>';
+$text = '<p class="class-name">Hello World!</p>';
 $chineseTypesetting->removeClass($text);
+// <p>Hello World!</p>
 
 // 清除 ID 属性
-$text = '<p id="id-name"></p>';
+$text = '<p id="id-name">Hello World!</p>';
 $chineseTypesetting->removeId($text);
+// <p>Hello World!</p>
 
 // 清除 Style 属性
-$text = '<p style="color: #FFFFFF;"></p>';
+$text = '<p style="color: #FFFFFF;">Hello World!</p>';
 $chineseTypesetting->removeStyle($text);
+// <p>Hello World!</p>
 ```
