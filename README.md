@@ -60,7 +60,7 @@ $text = '你好,世界.';
 $chineseTypesetting->fixPunctuation($text);
 // 你好，世界。
 
-// 中文后面使用全角中文标点
+// 不重复使用中文标点符号
 $text = '你好激动啊！！！';
 $chineseTypesetting->fixPunctuation($text);
 // 你好激动啊！
