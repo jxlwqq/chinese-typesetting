@@ -10,18 +10,33 @@ namespace Jxlwqq\ChineseTypesetting;
 
 class ChineseTypesetting
 {
+
+    private $cjk = ''.
+    '\x{2e80}-\x{2eff}'.
+    '\x{2f00}-\x{2fdf}'.
+    '\x{3040}-\x{309f}'.
+    '\x{30a0}-\x{30ff}'.
+    '\x{3100}-\x{312f}'.
+    '\x{3200}-\x{32ff}'.
+    '\x{3400}-\x{4dbf}'.
+    '\x{4e00}-\x{9fff}'.
+    '\x{f900}-\x{faff}';
+
     /**
      * 使用全部或指定的方法来纠正排版.
-     *
      * @param $text
      * @param array $methods
-     *
      * @return mixed
+     * @throws \ReflectionException
      */
     public function correct($text, $methods = [])
     {
         if (empty($methods)) {
-            $methods = get_class_methods($this);
+            $class = new \ReflectionClass($this);
+            $methodsList = $class->getMethods(\ReflectionMethod::IS_PUBLIC);
+            foreach ($methodsList as $methodObj) {
+                $methods[] = $methodObj->name;
+            }
         }
         foreach ($methods as $method) {
             if (__FUNCTION__ == $method || !method_exists($this, $method)) {
@@ -45,23 +60,13 @@ class ChineseTypesetting
      */
     public function insertSpace($text)
     {
-        $cjk = ''.
-            '\x{2e80}-\x{2eff}'.
-            '\x{2f00}-\x{2fdf}'.
-            '\x{3040}-\x{309f}'.
-            '\x{30a0}-\x{30ff}'.
-            '\x{3100}-\x{312f}'.
-            '\x{3200}-\x{32ff}'.
-            '\x{3400}-\x{4dbf}'.
-            '\x{4e00}-\x{9fff}'.
-            '\x{f900}-\x{faff}';
         $patterns = [
             'cjk_quote' => [
-                '(['.$cjk.'])(["\'])',
+                '(['.$this->cjk.'])(["\'])',
                 '$1 $2',
             ],
             'quote_cjk' => [
-                '(["\'])(['.$cjk.'])',
+                '(["\'])(['.$this->cjk.'])',
                 '$1 $2',
             ],
             'fix_quote' => [
@@ -69,33 +74,33 @@ class ChineseTypesetting
                 '$1$3$5',
             ],
             'cjk_hash' => [
-                '(['.$cjk.'])(#(\S+))',
+                '(['.$this->cjk.'])(#(\S+))',
                 '$1 $2',
             ],
             'hash_cjk' => [
-                '((\S+)#)(['.$cjk.'])',
+                '((\S+)#)(['.$this->cjk.'])',
                 '$1 $3',
             ],
             'cjk_operator_ans' => [
-                '(['.$cjk.'])([A-Za-zΑ-Ωα-ω0-9])([\+\-\*\/=&\\|<>])',
+                '(['.$this->cjk.'])([A-Za-zΑ-Ωα-ω0-9])([\+\-\*\/=&\\|<>])',
                 '$1 $2 $3',
             ],
             'ans_operator_cjk' => [
-                '([\+\-\*\/=&\\|<>])([A-Za-zΑ-Ωα-ω0-9])(['.$cjk.'])',
+                '([\+\-\*\/=&\\|<>])([A-Za-zΑ-Ωα-ω0-9])(['.$this->cjk.'])',
                 '$1 $2 $3',
             ],
             'bracket' => [
                 [
-                    '(['.$cjk.'])([<\[\{\(]+(.*?)[>\]\}\)]+)(['.$cjk.'])',
+                    '(['.$this->cjk.'])([<\[\{\(]+(.*?)[>\]\}\)]+)(['.$this->cjk.'])',
                     '$1 $2 $4',
                 ],
                 [
                     'cjk_bracket' => [
-                        '(['.$cjk.'])([<>\[\]\{\}\(\)])',
+                        '(['.$this->cjk.'])([<>\[\]\{\}\(\)])',
                         '$1 $2',
                     ],
                     'bracket_cjk' => [
-                        '([<>\[\]\{\}\(\)])(['.$cjk.'])',
+                        '([<>\[\]\{\}\(\)])(['.$this->cjk.'])',
                         '$1 $2',
                     ],
                 ],
@@ -105,11 +110,11 @@ class ChineseTypesetting
                 '$1$3$5',
             ],
             'cjk_ans' => [
-                '(['.$cjk.'])([A-Za-zΑ-Ωα-ω0-9`@&%\=\$\^\*\-\+\\/|\\\])',
+                '(['.$this->cjk.'])([A-Za-zΑ-Ωα-ω0-9`@&%\=\$\^\*\-\+\\/|\\\])',
                 '$1 $2',
             ],
             'ans_cjk' => [
-                '([A-Za-zΑ-Ωα-ω0-9`~!%&=;\|\,\.\:\?\$\^\*\-\+\/\\\])(['.$cjk.'])',
+                '([A-Za-zΑ-Ωα-ω0-9`~!%&=;\|\,\.\:\?\$\^\*\-\+\/\\\])(['.$this->cjk.'])',
                 '$1 $2',
             ],
         ];
