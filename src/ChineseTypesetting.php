@@ -275,7 +275,7 @@ class ChineseTypesetting
     }
 
     /**
-     * 清除段首缩紧.
+     * 清除段首缩进.
      *
      * @param $text
      *
