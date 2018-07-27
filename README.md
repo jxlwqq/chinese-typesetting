@@ -43,6 +43,29 @@ $chineseTypesetting->full2Half($text);
 ```
 有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）。参考依据：[中文文案排版指北：全角和半角](https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角)。
 
+
+### 修复错误的标点符号
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+// 修复省略号的错误用法
+$text = '她轻轻地哼起了《摇篮曲》：“月儿明，风儿静，树叶儿遮窗櫺啊…”';
+$chineseTypesetting->fixPunctuation($text);
+// 她轻轻地哼起了《摇篮曲》：“月儿明，风儿静，树叶儿遮窗櫺啊……”
+
+// 中文后面使用全角中文标点
+$text = '你好,世界.';
+$chineseTypesetting->fixPunctuation($text);
+// 你好，世界。
+
+// 中文后面使用全角中文标点
+$text = '你好激动啊！！！';
+$chineseTypesetting->fixPunctuation($text);
+// 你好激动啊！
+```
+
 ### 清除 HTML 标签的样式
 ```php
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
