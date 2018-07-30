@@ -153,7 +153,8 @@ class ChineseTypesetting
     public function fixPunctuation($text)
     {
         // 正确使用省略号
-        $text = preg_replace('[(。。。){1,2}|(\.\.\.){1,2}|(…){1}]', '……', $text);
+        $text = preg_replace('/([。\.]){3,}|(…){1}/iu', '……', $text);
+        $text = preg_replace('/(……){2,}/iu', '……', $text);
 
         // 中文以及中文标点符号（）》）后使用全角中文标点符号（包括！？。，（）：；）
         $text = preg_replace_callback('/(['.$this->cjk.'）》”])([!?\.,\(\):;])/iu', function ($matches) {
@@ -171,8 +172,8 @@ class ChineseTypesetting
             return $matches[1].$replace[$matches[2]];
         }, $text);
 
-        // 不重复使用中文标点符号（仅！和？），重复时只保留第一个
-        $text = preg_replace('/([！？，])([！？，]*)/iu', '$1', $text);
+        // 不重复使用中文标点符号，重复时只保留第一个
+        $text = preg_replace('/([！？。，；：、“”‘’『』〖〗《》（）])\1{1,}/iu', '\1', $text);
 
         return $text;
     }
