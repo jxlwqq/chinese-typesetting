@@ -22,7 +22,8 @@ class ChineseTypesetting
     '\x{f900}-\x{faff}';
 
     /**
-     * 使用全部或指定的方法来纠正排版.
+     * 使用全部或指定的方法来纠正排版
+     * correct typesetting error.
      *
      * @param $text
      * @param array $methods
@@ -252,7 +253,8 @@ class ChineseTypesetting
     }
 
     /**
-     * 清除空段落标签.
+     * 清除空段落标签
+     * Remove Empty Paragraph Tag.
      *
      * @param $text
      *
@@ -264,7 +266,8 @@ class ChineseTypesetting
     }
 
     /**
-     * 清除所有空标签.
+     * 清除所有空标签
+     * Remote All Empty Tags.
      *
      * @param $text
      *
@@ -277,6 +280,7 @@ class ChineseTypesetting
 
     /**
      * 清除段首缩进.
+     * Remove Indent.
      *
      * @param $text
      *
