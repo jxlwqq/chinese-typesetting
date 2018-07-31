@@ -32,7 +32,7 @@ class ChineseTypesetting
      *
      * @return mixed
      */
-    public function correct($text, $methods = [])
+    public function correct($text, array $methods = [])
     {
         if (empty($methods)) {
             $class = new \ReflectionClass($this);
@@ -40,6 +40,12 @@ class ChineseTypesetting
             foreach ($methodsList as $methodObj) {
                 $methods[] = $methodObj->name;
             }
+        }
+        $methods = array_unique($methods);
+        // insertSpace should be the end of array
+        if (in_array('insertSpace', $methods)) {
+            $methods = array_diff($methods, ['insertSpace']);
+            array_push($methods, 'insertSpace');
         }
         foreach ($methods as $method) {
             if (__FUNCTION__ == $method || !method_exists($this, $method)) {
