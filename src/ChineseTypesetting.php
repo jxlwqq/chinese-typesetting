@@ -51,6 +51,80 @@ class ChineseTypesetting
         return $text;
     }
 
+
+    /**
+     * 修复错误的标点符号
+     * update base on.
+     *
+     * @link https://github.com/ricoa/copywriting-correct/blob/master/src/Correctors/CharacterCorrector.php
+     *
+     * @param $text
+     *
+     * @return null|string|string[]
+     */
+    public function fixPunctuation($text)
+    {
+        // 正确使用省略号
+        $text = preg_replace('/([。\.]){3,}|(…){1}/iu', '……', $text);
+        $text = preg_replace('/(……){2,}/iu', '……', $text);
+
+        // 中文以及中文标点符号（）》）后使用全角中文标点符号（包括！？。，（）：；）
+        $text = preg_replace_callback('/(['.$this->cjk.'）》”])([!?\.,\(\):;])/iu', function ($matches) {
+            $replace = [
+                '!' => '！',
+                '?' => '？',
+                '.' => '。',
+                ',' => '，',
+                '(' => '（',
+                ')' => '）',
+                ':' => '：',
+                ';' => '；',
+            ];
+
+            return $matches[1].$replace[$matches[2]];
+        }, $text);
+
+        // 不重复使用中文标点符号，重复时只保留第一个
+        $text = preg_replace('/([！？。，；：、“”‘’『』〖〗《》（）])\1{1,}/iu', '\1', $text);
+
+        return $text;
+    }
+
+    /**
+     * 有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）
+     * Limited Fullwidth to halfwidth Transformer.
+     *
+     * @link https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角
+     *
+     * @param $text
+     *
+     * @return null|string|string[]
+     */
+    public function full2Half($text)
+    {
+        $arr = ['０' => '0', '１' => '1', '２' => '2', '３' => '3', '４' => '4',
+            '５'     => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9',
+            'Ａ'     => 'A', 'Ｂ' => 'B', 'Ｃ' => 'C', 'Ｄ' => 'D', 'Ｅ' => 'E',
+            'Ｆ'     => 'F', 'Ｇ' => 'G', 'Ｈ' => 'H', 'Ｉ' => 'I', 'Ｊ' => 'J',
+            'Ｋ'     => 'K', 'Ｌ' => 'L', 'Ｍ' => 'M', 'Ｎ' => 'N', 'Ｏ' => 'O',
+            'Ｐ'     => 'P', 'Ｑ' => 'Q', 'Ｒ' => 'R', 'Ｓ' => 'S', 'Ｔ' => 'T',
+            'Ｕ'     => 'U', 'Ｖ' => 'V', 'Ｗ' => 'W', 'Ｘ' => 'X', 'Ｙ' => 'Y',
+            'Ｚ'     => 'Z', 'ａ' => 'a', 'ｂ' => 'b', 'ｃ' => 'c', 'ｄ' => 'd',
+            'ｅ'     => 'e', 'ｆ' => 'f', 'ｇ' => 'g', 'ｈ' => 'h', 'ｉ' => 'i',
+            'ｊ'     => 'j', 'ｋ' => 'k', 'ｌ' => 'l', 'ｍ' => 'm', 'ｎ' => 'n',
+            'ｏ'     => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's',
+            'ｔ'     => 't', 'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x',
+            'ｙ'     => 'y', 'ｚ' => 'z',
+            '－'     => '-', '　' => ' ', '／' => '/',
+            '％'     => '%', '＃' => '#', '＠' => '@', '＆' => '&', '＜' => '<',
+            '＞'     => '>', '［' => '[', '］' => ']', '｛' => '{', '｝' => '}',
+            '＼'     => '\\', '｜' => '|', '＋' => '+', '＝' => '=', '＿' => '_',
+            '＾'     => '^', '￣' => '~', '｀' => '`', ];
+
+        return strtr($text, $arr);
+    }
+
+
     /**
      * 在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格
      * insert a space between Chinese character and English/Greek/Number character.
@@ -139,78 +213,6 @@ class ChineseTypesetting
         }
 
         return $text;
-    }
-
-    /**
-     * 修复错误的标点符号
-     * update base on.
-     *
-     * @link https://github.com/ricoa/copywriting-correct/blob/master/src/Correctors/CharacterCorrector.php
-     *
-     * @param $text
-     *
-     * @return null|string|string[]
-     */
-    public function fixPunctuation($text)
-    {
-        // 正确使用省略号
-        $text = preg_replace('/([。\.]){3,}|(…){1}/iu', '……', $text);
-        $text = preg_replace('/(……){2,}/iu', '……', $text);
-
-        // 中文以及中文标点符号（）》）后使用全角中文标点符号（包括！？。，（）：；）
-        $text = preg_replace_callback('/(['.$this->cjk.'）》”])([!?\.,\(\):;])/iu', function ($matches) {
-            $replace = [
-                '!' => '！',
-                '?' => '？',
-                '.' => '。',
-                ',' => '，',
-                '(' => '（',
-                ')' => '）',
-                ':' => '：',
-                ';' => '；',
-            ];
-
-            return $matches[1].$replace[$matches[2]];
-        }, $text);
-
-        // 不重复使用中文标点符号，重复时只保留第一个
-        $text = preg_replace('/([！？。，；：、“”‘’『』〖〗《》（）])\1{1,}/iu', '\1', $text);
-
-        return $text;
-    }
-
-    /**
-     * 有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）
-     * Limited Fullwidth to halfwidth Transformer.
-     *
-     * @link https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角
-     *
-     * @param $text
-     *
-     * @return null|string|string[]
-     */
-    public function full2Half($text)
-    {
-        $arr = ['０' => '0', '１' => '1', '２' => '2', '３' => '3', '４' => '4',
-            '５'     => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9',
-            'Ａ'     => 'A', 'Ｂ' => 'B', 'Ｃ' => 'C', 'Ｄ' => 'D', 'Ｅ' => 'E',
-            'Ｆ'     => 'F', 'Ｇ' => 'G', 'Ｈ' => 'H', 'Ｉ' => 'I', 'Ｊ' => 'J',
-            'Ｋ'     => 'K', 'Ｌ' => 'L', 'Ｍ' => 'M', 'Ｎ' => 'N', 'Ｏ' => 'O',
-            'Ｐ'     => 'P', 'Ｑ' => 'Q', 'Ｒ' => 'R', 'Ｓ' => 'S', 'Ｔ' => 'T',
-            'Ｕ'     => 'U', 'Ｖ' => 'V', 'Ｗ' => 'W', 'Ｘ' => 'X', 'Ｙ' => 'Y',
-            'Ｚ'     => 'Z', 'ａ' => 'a', 'ｂ' => 'b', 'ｃ' => 'c', 'ｄ' => 'd',
-            'ｅ'     => 'e', 'ｆ' => 'f', 'ｇ' => 'g', 'ｈ' => 'h', 'ｉ' => 'i',
-            'ｊ'     => 'j', 'ｋ' => 'k', 'ｌ' => 'l', 'ｍ' => 'm', 'ｎ' => 'n',
-            'ｏ'     => 'o', 'ｐ' => 'p', 'ｑ' => 'q', 'ｒ' => 'r', 'ｓ' => 's',
-            'ｔ'     => 't', 'ｕ' => 'u', 'ｖ' => 'v', 'ｗ' => 'w', 'ｘ' => 'x',
-            'ｙ'     => 'y', 'ｚ' => 'z',
-            '－'     => '-', '　' => ' ', '／' => '/',
-            '％'     => '%', '＃' => '#', '＠' => '@', '＆' => '&', '＜' => '<',
-            '＞'     => '>', '［' => '[', '］' => ']', '｛' => '{', '｝' => '}',
-            '＼'     => '\\', '｜' => '|', '＋' => '+', '＝' => '=', '＿' => '_',
-            '＾'     => '^', '￣' => '~', '｀' => '`', ];
-
-        return strtr($text, $arr);
     }
 
     /**
