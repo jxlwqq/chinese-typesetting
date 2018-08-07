@@ -19,7 +19,7 @@ $chineseTypesetting = new ChineseTypesetting();
 
 $text = '今天，我在Apple Store上购买了一台13英寸MacBook Pro笔记本电脑，花费了14188元。';
 $chineseTypesetting->insertSpace($text);
-// output: 今天，我在 Apple Store 上购买了一台 13 英寸 MacBook Pro 笔记本电脑，花费了 14188 元。。
+// output: 今天，我在 Apple Store 上购买了一台 13 英寸 MacBook Pro 笔记本电脑，花费了 14188 元。
 
 $text = 'α碳原子为与有机物中与官能团相连的第一个碳原子，第二个为β碳原子，以此类推。';
 $chineseTypesetting->insertSpace($text);
