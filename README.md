@@ -3,7 +3,7 @@
 统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。
 
 ## 安装
-使用 composer 安装：
+使用 [Composer](https://getcomposer.org/) 安装：
 ```bash
 composer require "jxlwqq/chinese-typesetting"
 ```
