@@ -10,6 +10,14 @@ namespace Jxlwqq\ChineseTypesetting;
 
 class ChineseTypesetting
 {
+    /**
+     * cjk 是中日韩统一表意文字缩写
+     * cjk is short for Chinese, Japanese and Korean.
+     *
+     * @link http://unicode-table.com/en/
+     *
+     * @var string
+     */
     private $cjk = ''.
     '\x{2e80}-\x{2eff}'.
     '\x{2f00}-\x{2fdf}'.
