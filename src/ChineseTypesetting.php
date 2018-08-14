@@ -49,12 +49,21 @@ class ChineseTypesetting
                 $methods[] = $methodObj->name;
             }
         }
+
         $methods = array_unique($methods);
-        // insertSpace should be the end of array
+
+        // removeEmptyTag 方法包含了 removeEmptyParagraph 方法的功能，如果这两个函数都存在，则需去除 removeEmptyParagraph 方法
+        if (in_array('removeEmptyTag', $methods)) {
+            $methods = array_diff($methods, ['removeEmptyParagraph']);
+        }
+
+        // insertSpace 方法应该是数组的最后一个元素
+        // the method insertSpace should be the end of array
         if (in_array('insertSpace', $methods)) {
             $methods = array_diff($methods, ['insertSpace']);
             array_push($methods, 'insertSpace');
         }
+
         foreach ($methods as $method) {
             if (__FUNCTION__ == $method || !method_exists($this, $method)) {
                 continue;
@@ -105,7 +114,7 @@ class ChineseTypesetting
     }
 
     /**
-     * 有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）
+     * 有限度的全角转半角（英文、数字、空格以及某些特殊字符等使用半角字符）
      * Limited Fullwidth to halfwidth Transformer.
      *
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角
