@@ -42,7 +42,6 @@ class ChineseTypesetting
     'Α-Ωα-ω'.
     '0-9';
 
-
     /**
      * 使用全部或指定的方法来纠正排版
      * Correct typesetting error.
@@ -87,7 +86,6 @@ class ChineseTypesetting
 
         return $text;
     }
-
 
     /**
      * 修复错误的标点符号
@@ -161,7 +159,6 @@ class ChineseTypesetting
         return strtr($text, $arr);
     }
 
-
     /**
      * 在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格
      * Insert a space between Chinese character and English/Greek/Number character.
@@ -202,7 +199,7 @@ class ChineseTypesetting
                 '$1 $2 $3',
             ],
             'ans_operator_cjk' => [
-                '([\+\-\*\/=&\\|<>])(['.$this->ln.'])([' .$this->cjk.'])',
+                '([\+\-\*\/=&\\|<>])(['.$this->ln.'])(['.$this->cjk.'])',
                 '$1 $2 $3',
             ],
             'bracket' => [
