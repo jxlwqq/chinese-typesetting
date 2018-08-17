@@ -30,8 +30,22 @@ class ChineseTypesetting
     '\x{f900}-\x{faff}';
 
     /**
+     * ln 是英文字母、希腊字母（用于数学、科学与工程）和阿拉伯数字的缩写
+     * ln is short of alphabetical letters, greek letters and numerical digits and symbols.
+     *
+     * @link https://en.wikipedia.org/wiki/Greek_letters_used_in_mathematics,_science,_and_engineering
+     *
+     * @var string
+     */
+    private $ln = ''.
+    'A-Za-z'.
+    'Α-Ωα-ω'.
+    '0-9';
+
+
+    /**
      * 使用全部或指定的方法来纠正排版
-     * correct typesetting error.
+     * Correct typesetting error.
      *
      * @param $text
      * @param array $methods
@@ -77,9 +91,9 @@ class ChineseTypesetting
 
     /**
      * 修复错误的标点符号
-     * update base on.
+     * Fix incorrect punctuations.
      *
-     * @link https://github.com/ricoa/copywriting-correct/blob/master/src/Correctors/CharacterCorrector.php
+     * update base on @link https://github.com/ricoa/copywriting-correct/blob/master/src/Correctors/CharacterCorrector.php
      *
      * @param $text
      *
@@ -115,7 +129,7 @@ class ChineseTypesetting
 
     /**
      * 有限度的全角转半角（英文、数字、空格以及某些特殊字符等使用半角字符）
-     * Limited Fullwidth to halfwidth Transformer.
+     * Limited full-width to half-width transformer.
      *
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角
      *
@@ -150,10 +164,10 @@ class ChineseTypesetting
 
     /**
      * 在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格
-     * insert a space between Chinese character and English/Greek/Number character.
-     * update base on.
+     * Insert a space between Chinese character and English/Greek/Number character.
      *
-     * @link https://github.com/Rakume/pangu.php/blob/master/pangu.php
+     * update base on @link https://github.com/Rakume/pangu.php/blob/master/pangu.php
+     *
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#空格
      *
      * @param $text
@@ -184,11 +198,11 @@ class ChineseTypesetting
                 '$1 $3',
             ],
             'cjk_operator_ans' => [
-                '(['.$this->cjk.'])([A-Za-zΑ-Ωα-ω0-9])([\+\-\*\/=&\\|<>])',
+                '(['.$this->cjk.'])(['.$this->ln.'])([\+\-\*\/=&\\|<>])',
                 '$1 $2 $3',
             ],
             'ans_operator_cjk' => [
-                '([\+\-\*\/=&\\|<>])([A-Za-zΑ-Ωα-ω0-9])(['.$this->cjk.'])',
+                '([\+\-\*\/=&\\|<>])(['.$this->ln.'])([' .$this->cjk.'])',
                 '$1 $2 $3',
             ],
             'bracket' => [
@@ -212,11 +226,11 @@ class ChineseTypesetting
                 '$1$3$5',
             ],
             'cjk_ans' => [
-                '(['.$this->cjk.'])([A-Za-zΑ-Ωα-ω0-9`@&%\=\$\^\*\-\+\\/|\\\])',
+                '(['.$this->cjk.'])(['.$this->ln.'`@&%\=\$\^\*\-\+\\/|\\\])',
                 '$1 $2',
             ],
             'ans_cjk' => [
-                '([A-Za-zΑ-Ωα-ω0-9`~!%&=;\|\,\.\:\?\$\^\*\-\+\/\\\])(['.$this->cjk.'])',
+                '(['.$this->ln.'`~!%&=;\|\,\.\:\?\$\^\*\-\+\/\\\])(['.$this->cjk.'])',
                 '$1 $2',
             ],
         ];
@@ -240,7 +254,7 @@ class ChineseTypesetting
 
     /**
      * 清除 Class 属性
-     * Remove Specific Class From HTML Tag.
+     * Remove specific class of HTML tags.
      *
      * @param $text
      *
@@ -253,7 +267,7 @@ class ChineseTypesetting
 
     /**
      * 清除 ID 属性
-     * Remove Specific Id From HTML Tag.
+     * Remove specific id of HTML tags.
      *
      * @param $text
      *
@@ -266,7 +280,7 @@ class ChineseTypesetting
 
     /**
      * 清除 Style 属性
-     * Remove Specific Style From HTML Tag.
+     * Remove specific style of HTML tags.
      *
      * @param $text
      *
@@ -279,7 +293,7 @@ class ChineseTypesetting
 
     /**
      * 清除空段落标签
-     * Remove Empty Paragraph Tag.
+     * Remove empty Paragraph tags.
      *
      * @param $text
      *
@@ -292,7 +306,7 @@ class ChineseTypesetting
 
     /**
      * 清除所有空标签
-     * Remote All Empty Tags.
+     * Remote all empty HTML tags.
      *
      * @param $text
      *
@@ -305,7 +319,7 @@ class ChineseTypesetting
 
     /**
      * 清除段首缩进.
-     * Remove Indent.
+     * Remove indent.
      *
      * @param $text
      *
