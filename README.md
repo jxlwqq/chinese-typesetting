@@ -2,6 +2,10 @@
  
 统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。
 
+[![Build Status](https://travis-ci.org/jxlwqq/chinese-typesetting.svg?branch=master)](https://travis-ci.org/jxlwqq/chinese-typesetting)
+[![StyleCI](https://github.styleci.io/repos/142371176/shield?branch=master)](https://github.styleci.io/repos/142371176)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jxlwqq/chinese-typesetting/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jxlwqq/chinese-typesetting/?branch=master)
+
 ## 安装
 使用 [Composer](https://getcomposer.org/) 安装：
 ```bash
