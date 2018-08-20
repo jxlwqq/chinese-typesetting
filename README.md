@@ -80,7 +80,7 @@ $chineseTypesetting->removeClass($text);
 // 清除 ID 属性
 $text = '<p id="id-name">你好，世界。</p>';
 $chineseTypesetting->removeId($text);
-// output: <p>Hello World!</p>
+// output: <p>你好，世界。</p>
 
 // 清除 Style 属性
 $text = '<p style="color: #FFFFFF;">你好，世界。</p>';
