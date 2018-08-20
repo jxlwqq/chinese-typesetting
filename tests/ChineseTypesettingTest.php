@@ -3,14 +3,12 @@
  * Created by PhpStorm.
  * User: jxlwqq
  * Date: 2018/8/20
- * Time: 13:55
+ * Time: 13:55.
  */
-
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
 
 class ChineseTypesettingTest extends \PHPUnit\Framework\TestCase
 {
-
     public function testRemoveId()
     {
         $chineseTypesetting = new ChineseTypesetting();
@@ -69,7 +67,6 @@ class ChineseTypesettingTest extends \PHPUnit\Framework\TestCase
 
     public function testRemoveStyle()
     {
-
         $chineseTypesetting = new ChineseTypesetting();
         $text = '<p style="color: #FFFFFF;">你好，世界。</p>';
         $this->assertEquals('<p>你好，世界。</p>', $chineseTypesetting->removeStyle($text));
