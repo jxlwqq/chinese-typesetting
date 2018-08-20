@@ -237,8 +237,8 @@ class ChineseTypesetting
                 $new = preg_replace('/'.$value[0][0].'/iu', $value[0][1], $text);
                 $text = $new;
                 if ($old === $new) {
-                    foreach ($value[1] as $value) {
-                        $text = preg_replace('/'.$value[0].'/iu', $value[1], $text);
+                    foreach ($value[1] as $val) {
+                        $text = preg_replace('/'.$val[0].'/iu', $val[1], $text);
                     }
                 }
                 continue;
