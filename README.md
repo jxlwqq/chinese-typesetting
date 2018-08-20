@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/jxlwqq/chinese-typesetting.svg?branch=master)](https://travis-ci.org/jxlwqq/chinese-typesetting)
 [![StyleCI](https://github.styleci.io/repos/142371176/shield?branch=master)](https://github.styleci.io/repos/142371176)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jxlwqq/chinese-typesetting/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jxlwqq/chinese-typesetting/?branch=master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjxlwqq%2Fchinese-typesetting.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjxlwqq%2Fchinese-typesetting?ref=badge_shield)
 
 ## 安装
 使用 [Composer](https://getcomposer.org/) 安装：
@@ -146,3 +147,6 @@ $text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
 $chineseTypesetting->correct($text, ['insertSpace', 'removeClass', 'removeIndent']);
 // output: <p style="color: #FFFFFF;">Hello 世界。</p>
 ```
+
+## License
+`chinese-typesetting` is licensed under [The MIT License (MIT)](./LICENSE).
