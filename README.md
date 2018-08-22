@@ -71,6 +71,40 @@ $chineseTypesetting->fixPunctuation($text);
 // output: 你好激动啊！
 ```
 
+#### 专有名词使用正确的大小写
+
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+$text = '今天午休的时候，我突然回想起了电影《泰坦尼克号》中 rose 裸身让 jack 作画的情节。'
+$chineseTypesetting->properNoun($text);
+// output：今天午休的时候，我突然回想起了电影《泰坦尼克号》中 Rose 裸身让 Jack 作画的情节。
+
+// 扩展词汇
+$text = '今天中午，我在 kfc 边吃着汉堡，边用 iphone 欣赏着电影《泰坦尼克号》中 rose 裸身让 JACK 作画的情节。'
+$chineseTypesetting->properNoun($text, ['iPhone']);
+// output：今天中午，我在 KFC 边吃着汉堡，边用 iPhone 欣赏着电影《泰坦尼克号》中 Rose 裸身让 Jack 作画的情节。
+
+// 忽略词汇
+$text = 'siri 告诉我，玫瑰对应的英文单词是 rose。'
+$chineseTypesetting->properNoun($text, [], ['Rose']);
+// output：Siri 告诉我，玫瑰对应的英文单词是 rose。
+```
+
+英语专有名词的数据来自于 [Wiktionary](https://en.wiktionary.org/w/index.php?title=Category:English_proper_nouns)。[采集爬虫链接](https://github.com/jxlwqq/english-proper-nouns)
+
+Wiktionary 声明收录了 61765 条英语专用名词，实际爬取量为 61711 条。
+
+* 使用 `is_numeric()` 方法，剔除诸如 `007`、 等词汇；
+* 使用 `'/\W/'` 正则，剔除诸如 `ǃXóõ` 等词汇；
+* 剔除 `strlen` 方法，剔除 `A` 等单字节字符词汇；
+* 剔除跟 HTML、CSS、JavaScript 保留字冲突的词汇。
+
+经过刷选后的词汇总量为 50190 条。
+
+
 ### 清除 HTML 标签的样式
 ```php
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
@@ -147,6 +181,9 @@ $text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
 $chineseTypesetting->correct($text, ['insertSpace', 'removeClass', 'removeIndent']);
 // output: <p style="color: #FFFFFF;">Hello 世界。</p>
 ```
+## Change Log
+
+* 1.2.0：新增 `properNoun()` 方法，用于纠正专有名词的大小写;
 
 ## License
 `chinese-typesetting` is licensed under [The MIT License (MIT)](./LICENSE).
