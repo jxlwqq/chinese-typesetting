@@ -71,7 +71,7 @@ $chineseTypesetting->fixPunctuation($text);
 // output: 你好激动啊！
 ```
 
-#### 专有名词使用正确的大小写
+### 专有名词使用正确的大小写
 
 ```php
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
@@ -97,12 +97,12 @@ $chineseTypesetting->properNoun($text, [], ['Rose']);
 
 Wiktionary 声明收录了 61765 条英语专用名词，实际爬取量为 61711 条。
 
+使用以下方法进行数据的整理和筛选：
+
 * 使用 `is_numeric()` 方法，剔除诸如 `007`、 等词汇；
 * 使用 `'/\W/'` 正则，剔除诸如 `ǃXóõ` 等词汇；
 * 剔除 `strlen` 方法，剔除 `A` 等单字节字符词汇；
 * 剔除跟 HTML、CSS、JavaScript 保留字冲突的词汇。
-
-经过刷选后的词汇总量为 50190 条。
 
 
 ### 清除 HTML 标签的样式
