@@ -78,4 +78,11 @@ class ChineseTypesettingTest extends \PHPUnit\Framework\TestCase
         $text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界.</p>';
         $this->assertEquals('<p>Hello 世界。</p>', $chineseTypesetting->correct($text));
     }
+
+    public function testProperNoun()
+    {
+        $chineseTypesetting = new ChineseTypesetting();
+        $text = '今天午休的时候，我突然回想起了电影《泰坦尼克号》中 rose 裸身让 jack 作画的情节。';
+        $this->assertEquals('今天午休的时候，我突然回想起了电影《泰坦尼克号》中 Rose 裸身让 Jack 作画的情节。', $chineseTypesetting->properNoun($text));
+    }
 }
