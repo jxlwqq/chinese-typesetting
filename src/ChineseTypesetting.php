@@ -273,6 +273,7 @@ class ChineseTypesetting
             // Matching proper nouns Outside Of Html Tags
             $text = preg_replace("/(?<!\.|[a-z]){$noun}(?!\.|[a-z])(?!([^<]+)?>)/i", $noun, $text);
         }
+
         return $text;
     }
 
