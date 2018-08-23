@@ -262,10 +262,10 @@ class ChineseTypesetting
     public function properNoun($text, array $extend = [], array $ignore = [])
     {
         $dict = include __DIR__.'/../data/dict.php';
-        if ($extend) {
+        if (!empty($extend)) {
             $dict = array_merge($dict, $extend);
         }
-        if ($ignore) {
+        if (!empty($ignore)) {
             $dict = array_diff($dict, $ignore);
         }
 
