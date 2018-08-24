@@ -184,6 +184,7 @@ $chineseTypesetting->correct($text, ['insertSpace', 'removeClass', 'removeIndent
 ## Change Log
 
 * 1.2.0：新增 `properNoun()` 方法，用于纠正专有名词的大小写;
+* 1.2.1：`removeEmptyTag()` 和 `removeEmptyParagraph()` 方法支持清除嵌套空标签；
 
 ## License
 `chinese-typesetting` is licensed under [The MIT License (MIT)](./LICENSE).
