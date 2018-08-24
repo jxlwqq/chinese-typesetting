@@ -321,12 +321,21 @@ class ChineseTypesetting
      * Remove empty Paragraph tags.
      *
      * @param $text
+     * @param bool $nested
      *
      * @return null|string|string[]
      */
-    public function removeEmptyParagraph($text)
+    public function removeEmptyParagraph($text, $nested = true)
     {
-        return preg_replace('/<p[^>]*>([\s|&nbsp;]?)<\\/p[^>]*>/', '', $text);
+        $pattern = '/<p[^>]*>([\s|&nbsp;]?)<\\/p[^>]*>/';
+        if ($nested) {
+            while (preg_match($pattern, $text)) {
+                $text = preg_replace($pattern, '', $text);
+            }
+        } else {
+            $text = preg_replace($pattern, '', $text);
+        }
+        return $text;
     }
 
     /**
@@ -334,12 +343,21 @@ class ChineseTypesetting
      * Remote all empty HTML tags.
      *
      * @param $text
+     * @param bool $nested
      *
      * @return null|string|string[]
      */
-    public function removeEmptyTag($text)
+    public function removeEmptyTag($text, $nested = true)
     {
-        return preg_replace('/<[^\/>]*>([\s|&nbsp;]?)*<\/[^>]*>/', '', $text);
+        $pattern = '/<[^\/>]*>([\s|&nbsp;]?)*<\/[^>]*>/';
+        if ($nested) {
+            while (preg_match($pattern, $text)) {
+                $text = preg_replace($pattern, '', $text);
+            }
+        } else {
+            $text = preg_replace($pattern, '', $text);
+        }
+        return $text;
     }
 
     /**
