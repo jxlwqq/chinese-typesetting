@@ -335,6 +335,7 @@ class ChineseTypesetting
         } else {
             $text = preg_replace($pattern, '', $text);
         }
+
         return $text;
     }
 
@@ -357,6 +358,7 @@ class ChineseTypesetting
         } else {
             $text = preg_replace($pattern, '', $text);
         }
+
         return $text;
     }
 
