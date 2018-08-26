@@ -43,7 +43,7 @@ class ChineseTypesetting
     '0-9';
 
     /**
-     * 保留的全角标点符号
+     * 保留的全角标点符号.
      *
      * @var string
      */
@@ -264,7 +264,7 @@ class ChineseTypesetting
     }
 
     /**
-     * 全角标点符号与其他字符之间无需添加空格；
+     * 全角标点符号与其他字符之间无需添加空格；.
      *
      * @param $text
      *
@@ -275,19 +275,21 @@ class ChineseTypesetting
         $patterns = [
             'fullwidth_space' => [
                 '(['.$this->fullwidthPunctuation.'])(['.$this->space.'])',
-                '$1'
+                '$1',
             ],
             'space_fullwidth' => [
                 '(['.$this->space.'])(['.$this->fullwidthPunctuation.'])',
-                '$2'
-            ]
+                '$2',
+            ],
         ];
 
         foreach ($patterns as $key => $value) {
             $text = preg_replace('/'.$value[0].'/u', $value[1], $text);
         }
+
         return $text;
     }
+
     /**
      * 专有名词使用正确的大小写
      * Correct English proper nouns.
