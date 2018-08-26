@@ -51,7 +51,6 @@ class ChineseTypesettingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('小林买了一部 iPhone X，他终于可以用上老婆的 iPhone 7 了，好开心！', $chineseTypesetting->removeSpace($text));
     }
 
-
     public function testRemoveClass()
     {
         $chineseTypesetting = new ChineseTypesetting();
