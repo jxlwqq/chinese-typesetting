@@ -38,6 +38,19 @@ $chineseTypesetting->insertSpace($text);
 
 目前，比较主流的约定是在中文与英文之间添加空格。我在此基础上，增加了对用于数学、科学和工程的希腊字母的支持。
 
+### 清除空格
+```php
+use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
+
+$chineseTypesetting = new ChineseTypesetting();
+
+$text = '小林买了一部 iPhone X，他终于可以用上老婆的 iPhone 7 了 ，好开心！';
+$chineseTypesetting->removeSpace($text);
+// output: 小林买了一部 iPhone X，他终于可以用上老婆的 iPhone 7 了，好开心！
+```
+全角标点符号与其他字符之间无需添加空格。
+
+
 ### 全角转半角
 ```php
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;

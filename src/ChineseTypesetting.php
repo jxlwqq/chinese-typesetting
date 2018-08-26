@@ -43,6 +43,20 @@ class ChineseTypesetting
     '0-9';
 
     /**
+     * 保留的全角标点符号
+     *
+     * @var string
+     */
+    private $fullwidthPunctuation = '！？。，；：、“”‘’『』「」〖〗【】《》（）';
+
+    /**
+     * 空格
+     *
+     * @var string
+     */
+    private $space = '\s|&nbsp;|　';
+
+    /**
      * 使用全部或指定的方法来纠正排版
      * Correct typesetting error.
      *
@@ -103,7 +117,7 @@ class ChineseTypesetting
         $text = preg_replace('/([。\.]){3,}|(…){1}/iu', '……', $text);
         $text = preg_replace('/(……){2,}/iu', '……', $text);
 
-        // 中文以及中文标点符号（）》）后使用全角中文标点符号（包括！？。，（）：；）
+        // 中文以及中文标点符号）》后使用全角中文标点符号（包括！？。，（）：；）
         $text = preg_replace_callback('/(['.$this->cjk.'）》”])([!?\.,\(\):;])/iu', function ($matches) {
             $replace = [
                 '!' => '！',
@@ -120,7 +134,7 @@ class ChineseTypesetting
         }, $text);
 
         // 不重复使用中文标点符号，重复时只保留第一个
-        $text = preg_replace('/([！？。，；：、“”‘’『』〖〗《》（）])\1{1,}/iu', '\1', $text);
+        $text = preg_replace('/(['.$this->fullwidthPunctuation.'])\1{1,}/iu', '\1', $text);
 
         return $text;
     }
@@ -250,6 +264,31 @@ class ChineseTypesetting
     }
 
     /**
+     * 全角标点符号与其他字符之间无需添加空格；
+     *
+     * @param $text
+     *
+     * @return null|string|string[]
+     */
+    public function removeSpace($text)
+    {
+        $patterns = [
+            'fullwidth_space' => [
+                '(['.$this->fullwidthPunctuation.'])(['.$this->space.'])',
+                '$1'
+            ],
+            'space_fullwidth' => [
+                '(['.$this->space.'])(['.$this->fullwidthPunctuation.'])',
+                '$2'
+            ]
+        ];
+
+        foreach ($patterns as $key => $value) {
+            $text = preg_replace('/'.$value[0].'/u', $value[1], $text);
+        }
+        return $text;
+    }
+    /**
      * 专有名词使用正确的大小写
      * Correct English proper nouns.
      *
@@ -327,7 +366,7 @@ class ChineseTypesetting
      */
     public function removeEmptyParagraph($text, $nested = true)
     {
-        $pattern = '/<p[^>]*>([\s|&nbsp;]?)<\\/p[^>]*>/';
+        $pattern = '/<p[^>]*>(['.$this->space.']?)<\\/p[^>]*>/';
         if ($nested) {
             while (preg_match($pattern, $text)) {
                 $text = preg_replace($pattern, '', $text);
@@ -350,7 +389,7 @@ class ChineseTypesetting
      */
     public function removeEmptyTag($text, $nested = true)
     {
-        $pattern = '/<[^\/>]*>([\s|&nbsp;]?)*<\/[^>]*>/';
+        $pattern = '/<[^\/>]*>(['.$this->space.']?)*<\/[^>]*>/';
         if ($nested) {
             while (preg_match($pattern, $text)) {
                 $text = preg_replace($pattern, '', $text);
@@ -372,6 +411,6 @@ class ChineseTypesetting
      */
     public function removeIndent($text)
     {
-        return preg_replace('/<p([^>]*)>(\s|&nbsp;)+/', '<p${1}>', $text);
+        return preg_replace('/<p([^>]*)>('.$this->space.')+/', '<p${1}>', $text);
     }
 }
