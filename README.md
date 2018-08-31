@@ -33,10 +33,9 @@ $chineseTypesetting->insertSpace($text);
 // output: α 碳原子为与有机物中与官能团相连的第一个碳原子，第二个为 β 碳原子，以此类推。
 ```
 
-在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格。 参考依据：[中文文案排版指北：空格
-](https://github.com/mzlogin/chinese-copywriting-guidelines#空格)。
+在中文与英文字母/用于数学、科学和工程的希腊字母/数字之间添加空格。
 
-目前，比较主流的约定是在中文与英文之间添加空格。我在此基础上，增加了对用于数学、科学和工程的希腊字母的支持。
+目前，比较主流的约定是在中文与英文之间添加空格。本包增加了对用于数学、科学和工程的希腊字母的支持。
 
 ### 清除空格
 ```php
@@ -61,7 +60,7 @@ $text = '这个名为 ＡＢＣ 的蛋糕只卖 １０００ 元。';
 $chineseTypesetting->full2Half($text);
 // output: 这个名为 ABC 的蛋糕只卖 1000 元。
 ```
-有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）。参考依据：[中文文案排版指北：全角和半角](https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角)。
+有限度的全角转半角（英文、数字、空格以及一些特殊字符等使用半角字符）。
 
 
 ### 修复错误的标点符号
@@ -110,9 +109,7 @@ $chineseTypesetting->properNoun($text, [], ['Rose']);
 
 英语专有名词的数据来自于 [Wiktionary](https://en.wiktionary.org/w/index.php?title=Category:English_proper_nouns)。[采集爬虫链接](https://github.com/jxlwqq/english-proper-nouns)
 
-Wiktionary 声明收录了 61765 条英语专用名词，实际爬取量为 61711 条。
-
-使用以下方法进行数据的整理和筛选：
+Wiktionary 声明收录了 61765 条英语专用名词，实际爬取量为 61711 条。并使用以下原则进行数据的整理和筛选：
 
 * 使用 `is_numeric()` 方法，剔除诸如 `007`、 等词汇；
 * 使用 `'/\W/'` 正则，剔除诸如 `ǃXóõ` 等词汇；
@@ -196,6 +193,13 @@ $text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
 $chineseTypesetting->correct($text, ['insertSpace', 'removeClass', 'removeIndent']);
 // output: <p style="color: #FFFFFF;">Hello 世界。</p>
 ```
+
+## 参考
+
+* [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
+* [中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
+
+
 ## Change Log
 
 * 1.2.0：新增 `properNoun()` 方法，用于纠正专有名词的大小写；
