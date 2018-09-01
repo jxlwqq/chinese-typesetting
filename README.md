@@ -199,6 +199,7 @@ $chineseTypesetting->correct($text, ['insertSpace', 'removeClass', 'removeIndent
 * [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
 * [中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
 * [用于数学、科学和工程的希腊字母](https://zh.wikipedia.org/wiki/用於數學、科學和工程的希臘字母)
+* [English proper nouns](https://en.wiktionary.org/w/index.php?title=Category:English_proper_nouns)
 
 
 ## Change Log
