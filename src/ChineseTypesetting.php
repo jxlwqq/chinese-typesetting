@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jxlwqq
- * Date: 2018/7/26
- * Time: 09:33.
- */
 
 namespace Jxlwqq\ChineseTypesetting;
 
+/**
+ * Class ChineseTypesetting
+ */
 class ChineseTypesetting
 {
     /**
@@ -60,7 +57,7 @@ class ChineseTypesetting
      * 使用全部或指定的方法来纠正排版
      * Correct typesetting error.
      *
-     * @param $text
+     * @param string $text
      * @param array $methods
      *
      * @throws \ReflectionException
@@ -107,7 +104,7 @@ class ChineseTypesetting
      *
      * update base on @link https://github.com/ricoa/copywriting-correct/blob/master/src/Correctors/CharacterCorrector.php
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -145,7 +142,7 @@ class ChineseTypesetting
      *
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#全角和半角
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -181,7 +178,7 @@ class ChineseTypesetting
      *
      * @link https://github.com/mzlogin/chinese-copywriting-guidelines#空格
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -266,7 +263,7 @@ class ChineseTypesetting
     /**
      * 全角标点符号与其他字符之间无需添加空格；.
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -294,7 +291,7 @@ class ChineseTypesetting
      * 专有名词使用正确的大小写
      * Correct English proper nouns.
      *
-     * @param $text
+     * @param string $text
      * @param array $extend
      * @param array $ignore
      *
@@ -322,7 +319,7 @@ class ChineseTypesetting
      * 清除 Class 属性
      * Remove specific class of HTML tags.
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -335,7 +332,7 @@ class ChineseTypesetting
      * 清除 ID 属性
      * Remove specific id of HTML tags.
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -348,7 +345,7 @@ class ChineseTypesetting
      * 清除 Style 属性
      * Remove specific style of HTML tags.
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
@@ -361,7 +358,7 @@ class ChineseTypesetting
      * 清除空段落标签
      * Remove empty Paragraph tags.
      *
-     * @param $text
+     * @param string $text
      * @param bool $nested
      *
      * @return null|string|string[]
@@ -384,7 +381,7 @@ class ChineseTypesetting
      * 清除所有空标签
      * Remote all empty HTML tags.
      *
-     * @param $text
+     * @param string $text
      * @param bool $nested
      *
      * @return null|string|string[]
@@ -407,7 +404,7 @@ class ChineseTypesetting
      * 清除段首缩进.
      * Remove indent.
      *
-     * @param $text
+     * @param string $text
      *
      * @return null|string|string[]
      */
