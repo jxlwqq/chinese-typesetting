@@ -3,7 +3,7 @@
 namespace Jxlwqq\ChineseTypesetting;
 
 /**
- * Class ChineseTypesetting
+ * Class ChineseTypesetting.
  */
 class ChineseTypesetting
 {
@@ -58,7 +58,7 @@ class ChineseTypesetting
      * Correct typesetting error.
      *
      * @param string $text
-     * @param array $methods
+     * @param array  $methods
      *
      * @throws \ReflectionException
      *
@@ -292,8 +292,8 @@ class ChineseTypesetting
      * Correct English proper nouns.
      *
      * @param string $text
-     * @param array $extend
-     * @param array $ignore
+     * @param array  $extend
+     * @param array  $ignore
      *
      * @return null|string|string[]
      */
@@ -359,7 +359,7 @@ class ChineseTypesetting
      * Remove empty Paragraph tags.
      *
      * @param string $text
-     * @param bool $nested
+     * @param bool   $nested
      *
      * @return null|string|string[]
      */
@@ -382,7 +382,7 @@ class ChineseTypesetting
      * Remote all empty HTML tags.
      *
      * @param string $text
-     * @param bool $nested
+     * @param bool   $nested
      *
      * @return null|string|string[]
      */
