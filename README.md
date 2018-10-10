@@ -183,15 +183,15 @@ use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
 
 $chineseTypesetting = new ChineseTypesetting();
 
-// 使用全部方法来纠正排版
-$text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
-$chineseTypesetting->correct($text);
-// output: <p>Hello 世界。</p>
-
-// 使用指定方法来纠正排版
+// 使用指定方法来纠正排版（推荐此用法）
 $text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
 $chineseTypesetting->correct($text, ['insertSpace', 'removeClass', 'removeIndent']);
 // output: <p style="color: #FFFFFF;">Hello 世界。</p>
+
+// 使用全部方法来纠正排版（不推荐此用法）
+$text = '<p class="class-name" style="color: #FFFFFF;"> Hello世界。</p>';
+$chineseTypesetting->correct($text);
+// output: <p>Hello 世界。</p>
 ```
 
 ## 参考
