@@ -271,11 +271,11 @@ class ChineseTypesetting
     {
         $patterns = [
             'fullwidth_space' => [
-                '(['.$this->fullwidthPunctuation.'])(['.$this->space.'])',
+                '(['.$this->fullwidthPunctuation.'])(\s)+',
                 '$1',
             ],
             'space_fullwidth' => [
-                '(['.$this->space.'])(['.$this->fullwidthPunctuation.'])',
+                '(\s)+(['.$this->fullwidthPunctuation.'])',
                 '$2',
             ],
         ];
