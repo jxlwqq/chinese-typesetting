@@ -178,6 +178,20 @@ $chineseTypesetting->removeIndent($text);
 首行是否缩进，[争议较大](https://zh.wikipedia.org/wiki/Wikipedia:投票/段落空兩格)，个人倾向于段首空两格，会破坏美感的观点。
 
 ### 使用指定的多种方法来纠正排版
+
+可用的方法清单：
+* fixPunctuation
+* full2Half
+* insertSpace
+* removeSpace
+* properNoun
+* removeClass
+* removeId
+* removeStyle
+* removeEmptyParagraph
+* removeEmptyTag
+* removeIndent
+
 ```php
 use Jxlwqq\ChineseTypesetting\ChineseTypesetting;
 
